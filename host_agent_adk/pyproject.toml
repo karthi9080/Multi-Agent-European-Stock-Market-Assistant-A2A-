@@ -1,0 +1,29 @@
+# Host agent: a Google ADK agent that talks to the Stock Info Agent over the A2A protocol.
+
+[project]
+name = "a2a-stock-host-agent"
+version = "0.1.0"
+description = "A multi-agent system (ADK host + LangGraph agent) for European stock market index lookups."
+requires-python = ">=3.12"
+dependencies = [
+    # Shared ADK & A2A Dependencies
+    "google-adk>=1.2.1",
+    # Pinned below 0.3 to match agent_langgraph (0.3 changed the client / server API)
+    "a2a-sdk>=0.2.5,<0.3.0",
+    "nest-asyncio>=1.6.0",
+    "python-dotenv",
+    "click",
+    "uvicorn",
+    "google-generativeai",
+    "httpx",
+    "grpcio==1.73.0",
+]
+
+[dependency-groups]
+dev = ["pytest>=8.0", "pytest-asyncio>=0.24"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+addopts = "--import-mode=importlib"
+pythonpath = [".", "tests"]
